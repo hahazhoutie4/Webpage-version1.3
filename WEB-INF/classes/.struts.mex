@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Struts2Diagram version="2.0">
+  <package name="front" location="185,99" size="197,267">
+    <action name="*" location="43,55" size="132,125">
+      <result name="index">
+        <resourceEdge source="index" routing="0" target="index.jsp" />
+      </result>
+      <result name="login">
+        <resourceEdge source="login" routing="0" target="login.jsp" />
+      </result>
+      <result name="manage">
+        <resourceEdge source="manage" routing="0" target="manage.jsp" />
+      </result>
+      <result name="authorized">
+        <resourceEdge source="authorized" routing="0" target="authorized_login.jsp" />
+      </result>
+      <result name="login_out">
+        <resourceEdge source="login_out" routing="0" target="index.jsp" />
+      </result>
+    </action>
+    <action name="img" location="37,195" size="150,41">
+      <result name="success" />
+    </action>
+  </package>
+  <package name="authorized" location="503,35" size="193,92">
+    <action name="authorized" location="40,48" size="150,41">
+      <result name="authorized">
+        <resourceEdge source="authorized" routing="0" target="authorized_login.jsp" />
+      </result>
+    </action>
+  </package>
+  <package name="register" location="873,200" size="192,183">
+    <action name="register_validate" location="40,48" size="150,41">
+      <result name="register_success">
+        <resourceEdge source="register_success" routing="0" target="index.jsp" />
+      </result>
+    </action>
+    <action name="register" location="40,140" size="150,41">
+      <result name="register">
+        <resourceEdge source="register" routing="0" target="register.jsp" />
+      </result>
+    </action>
+  </package>
+  <package name="ajax" location="737,458" size="193,134">
+    <action name="ajax" location="29,29" size="150,90">
+      <result name="success" />
+      <result name="stream" />
+      <result name="steel" />
+    </action>
+  </package>
+  <package name="surface" location="76,676" size="193,113">
+    <action name="*" location="40,48" size="150,62">
+      <result name="success" />
+      <result name="login">
+        <resourceEdge source="login" routing="0" target="login.jsp" />
+      </result>
+    </action>
+  </package>
+  <package name="admin" location="824,626" size="192,283">
+    <action name="adminlogin" location="40,48" size="150,62">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="adminmanage.jsp" />
+      </result>
+      <result name="adminlogin">
+        <resourceEdge source="adminlogin" routing="0" target="authorized_login.jsp" />
+      </result>
+    </action>
+    <action name="upload" location="40,140" size="150,62">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="upload_success.jsp" />
+      </result>
+      <result name="error">
+        <resourceEdge source="error" routing="0" target="upload_error.jsp" />
+      </result>
+    </action>
+    <action name="upload_return" location="40,240" size="150,41">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="upload.jsp" />
+      </result>
+    </action>
+  </package>
+  <webResource name="manage.jsp" path="/manage.jsp" location="729,83" size="150,55" />
+  <webResource name="index.jsp" path="/index.jsp" location="452,337" size="150,55" />
+  <webResource name="login.jsp" path="/login.jsp" location="97,421" size="150,55" />
+  <webResource name="authorized_login.jsp" path="/authorized_login.jsp" location="50,500" size="150,55" />
+  <webResource name="register.jsp" path="/register.jsp" location="54,820" size="150,55" />
+  <webResource name="adminmanage.jsp" path="/adminmanage.jsp" location="50,950" size="150,55" />
+  <webResource name="upload_success.jsp" path="/upload_success.jsp" location="414,906" size="150,55" />
+  <webResource name="upload_error.jsp" path="/upload_error.jsp" location="50,1100" size="150,55" />
+  <webResource name="upload.jsp" path="/upload.jsp" location="574,1055" size="150,55" />
+</Struts2Diagram>
+

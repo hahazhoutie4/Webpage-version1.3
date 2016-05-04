@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+ <class name="com.zhoutong.model.Floor" table="qrcode.floor">
+  <id name="id">
+   <generator class="uuid"/>
+  </id>
+  <property generated="never" lazy="false" name="floor_name" type="string"/>
+  <property column="floor_infor" generated="never" lazy="false"
+   name="floor_infor" type="string"/>
+  <property name="floor_steelnumber"/>
+  <property name="floor_concretenumber"/>
+  <property name="floor_areanumber"/>
+  <property name="floor_number"/>
+  <property name="construction_style"/>
+ </class>
+</hibernate-mapping>

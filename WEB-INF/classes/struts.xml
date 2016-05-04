@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+
+
+<!-- 常量配置start -->
+<constant name="struts.devMode" value="false"/>
+<constant name="struts.enable.DynamicMethodInvocation" value="true"/>
+<!-- 设置constant保存common fileupload文件地址 -->
+<constant name="struts.multipart.saveDir" value="/upload"/>
+<!-- 常量配置-end -->
+
+
+<!-- package -front-start -->
+ <package name="front" namespace="/manage" extends="struts-default">
+ <global-results> 
+<result name="error" type="redirect"> 
+     /error.jsp 
+</result> 
+</global-results>
+<action name="*" class="com.zhoutong.action.LoginAction" method="{1}"> 
+ <result name="index"> 
+ /index.jsp 
+ </result> 
+ <result name="login"> 
+ /login.jsp 
+ </result> 
+ <result name="manage"> 
+ /manage.jsp 
+ </result> 
+ <result name="authorized"> 
+ /authorized_login.jsp 
+ </result> 
+ <result name="login_out">
+ /index.jsp
+ </result>
+ </action> 
+ 
+<action name="img" class="com.zhoutong.action.LoginAction" method="img">
+<result  type="stream">
+<param name="contentType">image/jpeg</param>
+<param name="bufferSize">1024</param>
+<param name="inputName">stream</param>
+</result>
+</action>
+</package>
+
+<!-- package-front-end -->
+
+
+
+
+<!-- package-authorized-start -->
+<package name="authorized" namespace="/authorized" extends="struts-default">
+ <global-results> 
+<result name="error" type="redirect"> 
+     /error.jsp 
+</result> 
+</global-results>
+<action name="authorized" class="com.zhoutong.action.LoginAction" method="authorized">
+<result name="authorized">
+/authorized_login.jsp
+</result>
+</action>
+</package>
+<!-- package-authorized-end -->
+
+
+
+<!-- package-register-start -->
+<package name="register"  namespace="/" extends="struts-default">
+ <global-results> 
+<result name="error" type="redirect"> 
+     /error.jsp 
+</result> 
+</global-results>
+<action name="register_validate" class="com.zhoutong.action.LoginAction" method="register_validate">
+<result name="register_success">
+/index.jsp
+</result>
+</action>
+
+<action name="register" class="com.zhoutong.action.LoginAction" method="register">
+<result name="register">
+/register.jsp
+</result>
+</action>
+</package>
+<!-- package-register-end -->
+
+
+
+
+<!-- package-ajax-start -->
+<package name="ajax" namespace="/" extends="json-default">
+ <global-results> 
+<result name="error" type="redirect"> 
+     /error.jsp
+</result>
+</global-results>
+<action name="ajax" class="com.zhoutong.action.Ajaxaction">
+
+<result type="json" name="success">
+<param name="inputName">list</param>
+</result>
+
+<result type="stream" name="floor">
+<param name="inputName">stream</param>
+<param name="contentType">text/html</param>
+</result>
+
+<result name="steel" type="stream">
+<param name="inputName">stream</param>
+<param name="contentType">text/html</param>
+</result>
+
+<result name="scanfile" type="stream">
+<param name="inputName">stream</param>
+<param name="contentType">text/html</param>
+</result>
+
+<result name="author" type="stream">
+<param name="inputName">stream</param>
+<param name="contentType">text/html</param>
+</result>
+
+</action>
+</package>
+<!-- package-ajax-end -->
+
+
+
+<!-- 浏览个人主页，用到拦截器 login-->
+<package name="surface" namespace="/surface" extends="struts-default">
+<interceptors>
+<interceptor name="login" class="com.zhoutong.customeInterceptors.Myinterceptor"></interceptor>
+<interceptor name="adminlogin" class="com.zhoutong.customeInterceptors.AdminInter"></interceptor>
+</interceptors>
+ <global-results> 
+<result name="error" type="redirect"> 
+     /error.jsp 
+</result> 
+</global-results>
+<action name="*" class="com.zhoutong.action.SurfaceAction" method="{1}">
+<result name="success" type="stream">
+<param name="inputName">imageStream</param>
+<param name="contentType">image/jpeg</param>
+<param name="bufferSize">1024</param>
+</result>
+<result name="login">
+/login.jsp
+</result>
+<interceptor-ref name="login"/>
+<interceptor-ref name="defaultStack"/>
+</action>
+</package>
+<!-- 浏览个人主页，用到拦截器 login-->
+
+
+<!-- 管理员页面 -->
+<package name="admin" namespace="/admin" extends="struts-default">
+<interceptors>
+<interceptor name="login" class="com.zhoutong.customeInterceptors.Myinterceptor"></interceptor>
+<interceptor name="adminlogin" class="com.zhoutong.customeInterceptors.AdminInter"></interceptor>
+</interceptors>
+ <global-results> 
+<result name="error" type="redirect"> 
+     /error.jsp 
+</result> 
+</global-results>
+<action name="adminlogin_manage" class="com.zhoutong.action.LoginAction" method="tomanage">
+<result name="adminlogin">
+/adminmanage.jsp
+</result>
+</action>
+
+<action name="adminlogin"  class="com.zhoutong.action.LoginAction" method="adminlogin">
+<result name="success">
+/adminmanage.jsp
+</result>
+</action>
+
+<!-- 管理员页面返回主页 -->
+<action name="index" class="com.zhoutong.action.LoginAction" method="toindex">
+<result>/index.jsp</result>
+</action>
+
+<!-- 此处上传文件 -->
+<action name="upload" class="com.zhoutong.action.Uploadaction" method="upload">
+				<interceptor-ref name="fileUpload"/>  
+            	<interceptor-ref name="defaultStack">
+            	</interceptor-ref>
+<result>
+/upload_success.jsp   
+</result>
+<result name="error">
+/upload_error.jsp 
+</result>
+</action>
+
+
+<!-- 此处上传文件返回页面 -->
+<action name="upload_return" class="com.zhoutong.action.Uploadaction" method="upload_return">
+<result type="redirect">
+/upload.jsp
+</result>
+</action>
+
+</package>
+
+
+<!-- 管理员页面 -->
+<package name="image" namespace="/" extends="struts-default">
+<action name="image" class="com.zhoutong.action.SurfaceAction" method="searchimage">
+<result type="stream">	<!-- 指定image传递的参数?name="*" -->
+<param name="inputName">imageStream</param>
+<param name="bufferSize">1024</param>
+</result>
+</action>
+</package>
+
+</struts>

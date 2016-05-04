@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+ <class name="com.zhoutong.model.Image" table="qrcode.image">
+ <id name="Image_id" column="id" type="string">
+ <generator class="uuid"/>
+ </id>
+ <property name="Image_url" column="imageurl" type="string"></property>
+ <property name="Image_contentType" column="imagecontentType" type="string"></property>
+ <property name="Iamge_name" column="imagename" type="string" ></property>
+ <property name="name" column="name" type="string"></property>
+ </class>
+</hibernate-mapping>
